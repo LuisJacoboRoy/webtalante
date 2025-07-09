@@ -1,0 +1,63 @@
+/* estilos.css - Café Talante */
+body {
+  background: #f8f5f2;
+  font-family: 'Montserrat', Arial, sans-serif;
+}
+
+.navbar {
+  transition: background 0.4s;
+}
+
+.navbar-brand img {
+  margin-right: 10px;
+}
+
+#contenido {
+  min-height: 80vh;
+  background: linear-gradient(180deg, #fff 0%, #f8f5f2 100%);
+  animation: fadeIn 1s;
+}
+
+/* Animaciones y transiciones para móvil */
+@media (max-width: 991px) {
+  #contenido {
+    animation: slideInUp 0.7s;
+  }
+  .card {
+    transition: transform 0.3s, box-shadow 0.3s;
+  }
+  .card:hover {
+    transform: scale(1.03);
+    box-shadow: 0 8px 24px rgba(0,0,0,0.12);
+  }
+}
+
+/* Animaciones y transiciones para escritorio */
+@media (min-width: 992px) {
+  .card {
+    transition: box-shadow 0.4s, transform 0.4s;
+  }
+  .card:hover {
+    box-shadow: 0 12px 32px rgba(0,0,0,0.18);
+    transform: translateY(-8px) scale(1.04);
+  }
+}
+
+@keyframes fadeIn {
+  from { opacity: 0; }
+  to { opacity: 1; }
+}
+
+@keyframes slideInUp {
+  from { transform: translateY(40px); opacity: 0; }
+  to { transform: translateY(0); opacity: 1; }
+}
+
+footer {
+  background: #222;
+  color: #fff;
+}
+
+footer a {
+  text-decoration: underline;
+}
