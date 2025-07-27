@@ -1,0 +1,317 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Popup con Iframe - Bootstrap</title>
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.3.2/css/bootstrap.min.css" rel="stylesheet">
+    <style>
+        .popup-overlay {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.6);
+            backdrop-filter: blur(4px);
+            z-index: 9999;
+            opacity: 0;
+            visibility: hidden;
+            transition: all 0.3s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+        }
+        
+        .popup-overlay.active {
+            opacity: 1;
+            visibility: visible;
+        }
+        
+        .popup-container {
+            position: fixed;
+            bottom: 0;
+            left: 0;
+            width: 100%;
+            height: 85vh;
+            background: white;
+            border-radius: 20px 20px 0 0;
+            transform: translateY(100%);
+            transition: transform 0.4s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+            display: flex;
+            flex-direction: column;
+            box-shadow: 0 -10px 40px rgba(0, 0, 0, 0.2);
+        }
+        
+        .popup-overlay.active .popup-container {
+            transform: translateY(0);
+        }
+        
+        .popup-header {
+            padding: 20px;
+            border-bottom: 1px solid #e9ecef;
+            position: relative;
+            flex-shrink: 0;
+        }
+        
+        .drag-handle {
+            width: 40px;
+            height: 4px;
+            background: #dee2e6;
+            border-radius: 2px;
+            margin: 0 auto 15px;
+            cursor: pointer;
+        }
+        
+        .popup-content {
+            flex: 1;
+            overflow: hidden;
+            position: relative;
+        }
+        
+        .popup-iframe {
+            width: 100%;
+            height: 100%;
+            border: none;
+        }
+        
+        .close-btn {
+            position: absolute;
+            top: 20px;
+            right: 20px;
+            background: none;
+            border: none;
+            font-size: 24px;
+            color: #6c757d;
+            cursor: pointer;
+            width: 40px;
+            height: 40px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            border-radius: 50%;
+            transition: all 0.2s;
+        }
+        
+        .close-btn:hover {
+            background: #f8f9fa;
+            color: #495057;
+        }
+        
+        .trigger-btn {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            border: none;
+            color: white;
+            font-weight: 600;
+            letter-spacing: 0.5px;
+            box-shadow: 0 4px 15px rgba(102, 126, 234, 0.4);
+            transition: all 0.3s;
+        }
+        
+        .trigger-btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 6px 20px rgba(102, 126, 234, 0.6);
+            background: linear-gradient(135deg, #764ba2 0%, #667eea 100%);
+        }
+        
+        /* Animación de entrada del botón */
+        .trigger-btn {
+            animation: fadeInUp 0.6s ease-out;
+        }
+        
+        @keyframes fadeInUp {
+            from {
+                opacity: 0;
+                transform: translateY(30px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+        
+        /* Responsivo */
+        @media (max-width: 768px) {
+            .popup-container {
+                height: 90vh;
+                border-radius: 15px 15px 0 0;
+            }
+            
+            .popup-header {
+                padding: 15px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container mt-5">
+        <div class="row justify-content-center">
+            <div class="col-md-6 text-center">
+                <button id="openPopup" class="btn trigger-btn btn-lg px-5 py-3 rounded-pill">
+                    Ver detalles
+                </button>
+            </div>
+        </div>
+    </div>
+
+    <!-- Popup Overlay -->
+    <div id="popupOverlay" class="popup-overlay">
+        <div class="popup-container" id="popupContainer">
+            <div class="popup-header">
+                <div class="drag-handle"></div>
+                <h5 class="mb-0">Contenido Embebido</h5>
+                <button class="close-btn" id="closePopup">
+                    ×
+                </button>
+            </div>
+            <div class="popup-content">
+                <iframe 
+                    class="popup-iframe" 
+                    src="https://www.mercadopago.com.mx/checkout/v1/payment/redirect/?source=link&preference-id=18429204-e77ff152-122b-424f-871d-e1b15138c6c4&router-request-id=4a42e2f0-bcd3-4cdb-91c5-1777665fa52c"
+                    title="Contenido embebido"
+                    loading="lazy">
+                </iframe>
+            </div>
+        </div>
+    </div>
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.3.2/js/bootstrap.bundle.min.js"></script>
+    <script>
+        class PopupManager {
+            constructor() {
+                this.overlay = document.getElementById('popupOverlay');
+                this.container = document.getElementById('popupContainer');
+                this.openBtn = document.getElementById('openPopup');
+                this.closeBtn = document.getElementById('closePopup');
+                this.dragHandle = document.querySelector('.drag-handle');
+                
+                this.startY = 0;
+                this.currentY = 0;
+                this.isDragging = false;
+                this.threshold = 100; // píxeles para cerrar
+                
+                this.init();
+            }
+            
+            init() {
+                // Event listeners para botones
+                this.openBtn.addEventListener('click', () => this.open());
+                this.closeBtn.addEventListener('click', () => this.close());
+                this.overlay.addEventListener('click', (e) => {
+                    if (e.target === this.overlay) this.close();
+                });
+                
+                // Touch events para swipe down
+                this.container.addEventListener('touchstart', (e) => this.handleTouchStart(e), { passive: false });
+                this.container.addEventListener('touchmove', (e) => this.handleTouchMove(e), { passive: false });
+                this.container.addEventListener('touchend', (e) => this.handleTouchEnd(e), { passive: false });
+                
+                // Mouse events para desktop (opcional)
+                this.dragHandle.addEventListener('mousedown', (e) => this.handleMouseStart(e));
+                document.addEventListener('mousemove', (e) => this.handleMouseMove(e));
+                document.addEventListener('mouseup', (e) => this.handleMouseEnd(e));
+            }
+            
+            open() {
+                this.overlay.classList.add('active');
+                document.body.style.overflow = 'hidden';
+            }
+            
+            close() {
+                this.overlay.classList.remove('active');
+                document.body.style.overflow = '';
+                this.resetPosition();
+            }
+            
+            handleTouchStart(e) {
+                this.startY = e.touches[0].clientY;
+                this.isDragging = true;
+                this.container.style.transition = 'none';
+            }
+            
+            handleTouchMove(e) {
+                if (!this.isDragging) return;
+                
+                this.currentY = e.touches[0].clientY - this.startY;
+                
+                // Solo permitir arrastrar hacia abajo
+                if (this.currentY > 0) {
+                    e.preventDefault();
+                    const translateY = Math.min(this.currentY, 300);
+                    this.container.style.transform = `translateY(${translateY}px)`;
+                    
+                    // Cambiar opacidad del overlay basado en la distancia
+                    const opacity = Math.max(0.3, 1 - (translateY / 400));
+                    this.overlay.style.background = `rgba(0, 0, 0, ${opacity * 0.6})`;
+                }
+            }
+            
+            handleTouchEnd(e) {
+                if (!this.isDragging) return;
+                
+                this.isDragging = false;
+                this.container.style.transition = 'transform 0.4s cubic-bezier(0.25, 0.46, 0.45, 0.94)';
+                
+                // Si se arrastró más del threshold, cerrar
+                if (this.currentY > this.threshold) {
+                    this.close();
+                } else {
+                    this.resetPosition();
+                }
+            }
+            
+            // Mouse events para desktop
+            handleMouseStart(e) {
+                this.startY = e.clientY;
+                this.isDragging = true;
+                this.container.style.transition = 'none';
+                e.preventDefault();
+            }
+            
+            handleMouseMove(e) {
+                if (!this.isDragging) return;
+                
+                this.currentY = e.clientY - this.startY;
+                
+                if (this.currentY > 0) {
+                    const translateY = Math.min(this.currentY, 300);
+                    this.container.style.transform = `translateY(${translateY}px)`;
+                    
+                    const opacity = Math.max(0.3, 1 - (translateY / 400));
+                    this.overlay.style.background = `rgba(0, 0, 0, ${opacity * 0.6})`;
+                }
+            }
+            
+            handleMouseEnd(e) {
+                if (!this.isDragging) return;
+                
+                this.isDragging = false;
+                this.container.style.transition = 'transform 0.4s cubic-bezier(0.25, 0.46, 0.45, 0.94)';
+                
+                if (this.currentY > this.threshold) {
+                    this.close();
+                } else {
+                    this.resetPosition();
+                }
+            }
+            
+            resetPosition() {
+                this.container.style.transform = 'translateY(0)';
+                this.overlay.style.background = 'rgba(0, 0, 0, 0.6)';
+                this.currentY = 0;
+            }
+        }
+        
+        // Inicializar cuando el DOM esté listo
+        document.addEventListener('DOMContentLoaded', () => {
+            new PopupManager();
+        });
+        
+        // Prevenir scroll del body cuando el popup esté abierto
+        document.addEventListener('touchmove', (e) => {
+            if (document.getElementById('popupOverlay').classList.contains('active')) {
+                if (!e.target.closest('.popup-container')) {
+                    e.preventDefault();
+                }
+            }
+        }, { passive: false });
+    </script>
+</body>
+</html>
