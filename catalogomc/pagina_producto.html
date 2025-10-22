@@ -1,0 +1,291 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Café Talánte Sierra Norte Juárez - Página de Producto</title>
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.3.2/css/bootstrap.min.css" rel="stylesheet">
+    <style>
+        body {
+            background-color: #f8f9fa;
+        }
+
+        .product-card {
+            background-color: white;
+            border-radius: 20px;
+            padding: 2rem;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.07);
+            margin-top: 2rem;
+        }
+
+        .product-image {
+            width: 100%;
+            border-radius: 15px;
+            object-fit: cover;
+        }
+
+        .product-title {
+            font-weight: 700;
+            color: #343a40;
+        }
+
+        .product-price {
+            font-size: 2.5rem;
+            font-weight: 700;
+            color: #28a745;
+            margin-bottom: 1.5rem;
+        }
+
+        .product-section-title {
+            border-bottom: 2px solid #667eea;
+            padding-bottom: 10px;
+            margin-top: 2.5rem;
+            margin-bottom: 1.5rem;
+            display: inline-block;
+        }
+
+        /* Estilos del botón y popup (INTACTOS) */
+        .trigger-btn {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            border: none;
+            color: white;
+            font-weight: 600;
+            letter-spacing: 0.5px;
+            box-shadow: 0 4px 15px rgba(102, 126, 234, 0.4);
+            transition: all 0.3s;
+            width: 100%;
+        }
+        
+        .trigger-btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 6px 20px rgba(102, 126, 234, 0.6);
+            background: linear-gradient(135deg, #764ba2 0%, #667eea 100%);
+            color: white;
+        }
+
+        .popup-overlay {
+            position: fixed; top: 0; left: 0; width: 100%; height: 100%;
+            background: rgba(0, 0, 0, 0.6); backdrop-filter: blur(4px);
+            z-index: 9999; opacity: 0; visibility: hidden;
+            transition: all 0.3s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+        }
+        .popup-overlay.active { opacity: 1; visibility: visible; }
+        .popup-container {
+            position: fixed; bottom: 0; left: 0; width: 100%; height: 85vh;
+            background: white; border-radius: 20px 20px 0 0;
+            transform: translateY(100%);
+            transition: transform 0.4s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+            display: flex; flex-direction: column;
+            box-shadow: 0 -10px 40px rgba(0, 0, 0, 0.2);
+        }
+        .popup-overlay.active .popup-container { transform: translateY(0); }
+        .popup-header {
+            padding: 20px; border-bottom: 1px solid #e9ecef; position: relative; flex-shrink: 0;
+        }
+        .drag-handle {
+            width: 40px; height: 4px; background: #dee2e6; border-radius: 2px;
+            margin: 0 auto 15px; cursor: pointer;
+        }
+        .popup-content { flex: 1; overflow: hidden; position: relative; }
+        .popup-iframe { width: 100%; height: 100%; border: none; }
+        .close-btn {
+            position: absolute; top: 20px; right: 20px; background: none; border: none;
+            font-size: 24px; color: #6c757d; cursor: pointer; width: 40px; height: 40px;
+            display: flex; align-items: center; justify-content: center;
+            border-radius: 50%; transition: all 0.2s;
+        }
+        .close-btn:hover { background: #f8f9fa; color: #495057; }
+    </style>
+</head>
+<body>
+
+    <div class="container my-4">
+        <div class="product-card">
+            <div class="row g-5">
+                <!-- Columna de la Imagen -->
+                <div class="col-lg-6">
+                    <img src="../images/productos/sn.jpg" alt="Café Talánte Sierra Norte Juárez" class="product-image">
+                </div>
+
+                <!-- Columna de Información y Compra -->
+                <div class="col-lg-6 d-flex flex-column">
+                    <h1 class="product-title">Café Talánte Sierra Norte Juárez</h1>
+                    <p class="text-muted">Café de Especialidad | Molido | 250g</p>
+                    
+                    <div class="product-price mt-3">
+                        $250.00
+                    </div>
+
+                    <p class="mb-4">
+                        Disfruta de un café de especialidad de la Sierra Norte de Oaxaca, cultivado bajo sombra y con procesos que cuidan el medio ambiente. Notas de sabor a piloncillo, chocolate y nuez.
+                    </p>
+
+                    <div class="mt-auto">
+                        <button id="openPopup" class="btn trigger-btn btn-lg px-5 py-3 rounded-pill">
+                            Comprar ahora
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Sección de Características y Descripción -->
+        <div class="product-card mt-4">
+            <div class="row">
+                <div class="col-12">
+                    <h3 class="product-section-title">Características del producto</h3>
+                    <table class="table table-striped table-borderless">
+                        <tbody>
+                            <tr><th scope="row">Marca</th><td>Talánte</td></tr>
+                            <tr><th scope="row">Línea</th><td>Café de Especialidad</td></tr>
+                            <tr><th scope="row">Formato del café</th><td>Molido</td></tr>
+                            <tr><th scope="row">Tipo de café</th><td>Arábica</td></tr>
+                            <tr><th scope="row">Tipo de envase</th><td>Bolsa</td></tr>
+                            <tr><th scope="row">Peso de la unidad</th><td>250 g</td></tr>
+                            <tr><th scope="row">Nivel de tostado</th><td>Medio</td></tr>
+                            <tr><th scope="row">Orgánico</th><td>Sí</td></tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+            <div class="row mt-4">
+                <div class="col-12">
+                    <h3 class="product-section-title">Descripción</h3>
+                    <p>Café Talánte es un café de especialidad de la Sierra Norte de Oaxaca, una de las regiones más ricas en biodiversidad de México. Nuestro café es cultivado bajo sombra, lo que permite la conservación de la flora y fauna local.</p>
+                    <p>El proceso de nuestro café es lavado, lo que resalta las notas de sabor a piloncillo, chocolate y nuez. Es un café con una acidez cítrica y un cuerpo sedoso, ideal para disfrutar en cualquier momento del día.</p>
+                    <p>Al comprar Café Talánte, no solo estás adquiriendo un producto de alta calidad, sino que también estás apoyando a los pequeños productores de la Sierra Norte de Oaxaca y contribuyendo a la conservación del medio ambiente.</p>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Popup Overlay (INTACTO) -->
+    <div id="popupOverlay" class="popup-overlay">
+        <div class="popup-container" id="popupContainer">
+            <div class="popup-header">
+                <div class="drag-handle"></div>
+                <h5 class="mb-0">Finalizar Compra</h5>
+                <button class="close-btn" id="closePopup">×</button>
+            </div>
+            <div class="popup-content">
+                <iframe 
+                    class="popup-iframe" 
+                    src="https://www.mercadopago.com.mx/checkout/v1/payment/redirect/?source=link&preference-id=18429204-e77ff152-122b-424f-871d-e1b15138c6c4&router-request-id=4a42e2f0-bcd3-4cdb-91c5-1777665fa52c"
+                    title="Checkout de Mercado Pago"
+                    loading="lazy">
+                </iframe>
+            </div>
+        </div>
+    </div>
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.3.2/js/bootstrap.bundle.min.js"></script>
+    <script>
+        // Lógica del Popup Manager (INTACTA)
+        class PopupManager {
+            constructor() {
+                this.overlay = document.getElementById('popupOverlay');
+                this.container = document.getElementById('popupContainer');
+                this.openBtn = document.getElementById('openPopup');
+                this.closeBtn = document.getElementById('closePopup');
+                this.dragHandle = document.querySelector('.drag-handle');
+                
+                this.startY = 0;
+                this.currentY = 0;
+                this.isDragging = false;
+                this.threshold = 100; // píxeles para cerrar
+                
+                this.init();
+            }
+            
+            init() {
+                this.openBtn.addEventListener('click', () => this.open());
+                this.closeBtn.addEventListener('click', () => this.close());
+                this.overlay.addEventListener('click', (e) => {
+                    if (e.target === this.overlay) this.close();
+                });
+                
+                this.container.addEventListener('touchstart', (e) => this.handleTouchStart(e), { passive: true });
+                this.container.addEventListener('touchmove', (e) => this.handleTouchMove(e), { passive: false });
+                this.container.addEventListener('touchend', (e) => this.handleTouchEnd(e));
+                
+                this.dragHandle.addEventListener('mousedown', (e) => this.handleMouseStart(e));
+                document.addEventListener('mousemove', (e) => this.handleMouseMove(e));
+                document.addEventListener('mouseup', (e) => this.handleMouseEnd(e));
+            }
+            
+            open() {
+                this.overlay.classList.add('active');
+                document.body.style.overflow = 'hidden';
+            }
+            
+            close() {
+                this.overlay.classList.remove('active');
+                document.body.style.overflow = '';
+                this.resetPosition();
+            }
+            
+            handleTouchStart(e) {
+                if (!e.target.closest('.drag-handle')) return;
+                this.startY = e.touches[0].clientY;
+                this.isDragging = true;
+                this.container.style.transition = 'none';
+            }
+            
+            handleTouchMove(e) {
+                if (!this.isDragging) return;
+                e.preventDefault();
+                this.currentY = e.touches[0].clientY - this.startY;
+                if (this.currentY > 0) {
+                    this.container.style.transform = `translateY(${this.currentY}px)`;
+                }
+            }
+            
+            handleTouchEnd() {
+                if (!this.isDragging) return;
+                this.isDragging = false;
+                this.container.style.transition = 'transform 0.4s cubic-bezier(0.25, 0.46, 0.45, 0.94)';
+                if (this.currentY > this.threshold) {
+                    this.close();
+                } else {
+                    this.resetPosition();
+                }
+            }
+            
+            handleMouseStart(e) {
+                this.startY = e.clientY;
+                this.isDragging = true;
+                this.container.style.transition = 'none';
+                e.preventDefault();
+            }
+            
+            handleMouseMove(e) {
+                if (!this.isDragging) return;
+                this.currentY = e.clientY - this.startY;
+                if (this.currentY > 0) {
+                    this.container.style.transform = `translateY(${this.currentY}px)`;
+                }
+            }
+            
+            handleMouseEnd() {
+                if (!this.isDragging) return;
+                this.isDragging = false;
+                this.container.style.transition = 'transform 0.4s cubic-bezier(0.25, 0.46, 0.45, 0.94)';
+                if (this.currentY > this.threshold) {
+                    this.close();
+                } else {
+                    this.resetPosition();
+                }
+            }
+            
+            resetPosition() {
+                this.container.style.transform = '';
+                this.currentY = 0;
+            }
+        }
+        
+        document.addEventListener('DOMContentLoaded', () => {
+            new PopupManager();
+        });
+    </script>
+</body>
+</html>

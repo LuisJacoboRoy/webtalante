@@ -96,7 +96,7 @@ a {
 }
 
 a:hover, a:focus, a:active {
-    color: #39b54a;
+    color: #b35e36;
 }
 
 a:hover, a:active {
@@ -363,7 +363,7 @@ ul.disc li::before {
     width: 8px;
     height: 8px;
     border-radius: 50%;
-    background: #39b54a;
+    background: #b35e36;
     position: absolute;
     left: -17px;
     top: 11px;
@@ -372,7 +372,7 @@ ul.disc li::before {
 
 dt {
     margin: 0;
-    color: #39b54a;
+    color: #b35e36;
 }
 
 dd {
@@ -494,7 +494,7 @@ form,
 }
 
 .pace .pace-progress {
-    background: #39b54a;
+    background: #b35e36;
     position: fixed;
     z-index: 900;
     top: 0;
@@ -537,7 +537,7 @@ form,
 }
 
 .line-scale-pulse-out > div {
-    background-color: #39b54a;
+    background-color: #b35e36;
     width: 4px;
     height: 35px;
     border-radius: 2px;
@@ -732,7 +732,7 @@ textarea:-webkit-autofill:hover textarea:-webkit-autofill:focus,
 select:-webkit-autofill,
 select:-webkit-autofill:hover,
 select:-webkit-autofill:focus {
-    -webkit-text-fill-color: #39b54a;
+    -webkit-text-fill-color: #b35e36;
     transition: background-color 5000s ease-in-out 0s;
 }
 
@@ -792,8 +792,8 @@ button.btn--primary,
 input[type="submit"].btn--primary,
 input[type="reset"].btn--primary,
 input[type="button"].btn--primary {
-    background: #39b54a;
-    border-color: #39b54a;
+    background: #b35e36;
+    border-color: #b35e36;
     color: #FFFFFF;
 }
 
@@ -822,8 +822,8 @@ input[type="button"].btn--primary:focus {
 
 .btn--stroke, button.btn--stroke {
     background: transparent !important;
-    border: 0.2rem solid #39b54a;
-    color: #39b54a;
+    border: 0.2rem solid #b35e36;
+    color: #b35e36;
 }
 
 .btn--stroke:hover, button.btn--stroke:hover {
@@ -1005,7 +1005,7 @@ button::-moz-focus-inner, input::-moz-focus-inner {
 }
 
 .stats-tabs li a:hover {
-    color: #39b54a;
+    color: #b35e36;
 }
 
 .stats-tabs li a em {
@@ -1131,7 +1131,7 @@ button::-moz-focus-inner, input::-moz-focus-inner {
     line-height: 1.333;
     text-transform: uppercase;
     letter-spacing: .25rem;
-    color: #39b54a;
+    color: #b35e36;
     margin-top: 0;
     margin-bottom: 0;
 }
@@ -1305,7 +1305,7 @@ button::-moz-focus-inner, input::-moz-focus-inner {
 
 .slick-slider .slick-dots li.slick-active button,
 .slick-slider .slick-dots li:hover button {
-    background: #39b54a;
+    background: #b35e36;
 }
 
 
@@ -1398,7 +1398,7 @@ button::-moz-focus-inner, input::-moz-focus-inner {
     letter-spacing: .25rem;
     margin-bottom: 4.8rem;
     margin-top: .9rem;
-    color: #39b54a;
+    color: #b35e36;
 }
 
 .header-nav p {
@@ -1536,7 +1536,7 @@ button::-moz-focus-inner, input::-moz-focus-inner {
     font-size: 1.3rem;
     text-transform: uppercase;
     letter-spacing: .3rem;
-    color: #39b54a;
+    color: #b35e36;
     -webkit-transition: all 0.5s ease-in-out;
     transition: all 0.5s ease-in-out;
 }
@@ -1744,8 +1744,8 @@ button::-moz-focus-inner, input::-moz-focus-inner {
 }
 
 .home-content__scroll a::before {
-    border-bottom: 2px solid #39b54a;
-    border-right: 2px solid #39b54a;
+    border-bottom: 2px solid #b35e36;
+    border-right: 2px solid #b35e36;
     content: '';
     display: block;
     height: 8px;
@@ -1769,7 +1769,7 @@ button::-moz-focus-inner, input::-moz-focus-inner {
     display: block;
     width: 2px;
     height: 10.2rem;
-    background-color: #39b54a;
+    background-color: #b35e36;
     position: absolute;
     right: 7.2rem;
     bottom: 0;
@@ -1829,7 +1829,7 @@ button::-moz-focus-inner, input::-moz-focus-inner {
 }
 
 .home-social span {
-    color: #39b54a;
+    color: #b35e36;
     right: 4.5rem;
     font-size: 1.3rem;
     opacity: 0;
@@ -2081,7 +2081,7 @@ html.cl-loaded .home-content__main {
 .s-about {
     padding-top: 16.2rem;
     padding-bottom: 9rem;
-    background-color: #39b54a;
+    background-color: #b35e36;
     color: #010507;
     position: relative;
 }
@@ -2286,7 +2286,7 @@ html.cl-loaded .home-content__main {
 
 .services-list .service-icon {
     float: left;
-    color: #39b54a;
+    color: #b35e36;
     font-size: 4.8rem;
     margin-top: -.6rem;
 }
@@ -2855,7 +2855,7 @@ html.cl-loaded .home-content__main {
     padding: 0 2rem;
     margin: 0;
     color: #FFFFFF;
-    background: #39b54a;
+    background: #b35e36;
 }
 
 .s-contact .form-field label::after {
@@ -2866,14 +2866,14 @@ html.cl-loaded .home-content__main {
     margin-top: -6px;
     border-top: 5px solid transparent;
     border-bottom: 5px solid transparent;
-    border-right: 5px solid #39b54a;
+    border-right: 5px solid #b35e36;
 }
 
 .contact__line {
     display: block;
     width: 2px;
     height: 20.4rem;
-    background-color: #39b54a;
+    background-color: #b35e36;
     position: absolute;
     left: 50%;
     top: -10.2rem;
@@ -2900,7 +2900,7 @@ html.cl-loaded .home-content__main {
 
 .contact-content h5 {
     margin-top: 0;
-    color: #39b54a;
+    color: #b35e36;
 }
 
 .contact-content input[type="email"],
@@ -2927,7 +2927,7 @@ html.cl-loaded .home-content__main {
 .contact-content textarea:focus,
 .contact-content select:focus {
     color: #FFFFFF;
-    border-bottom: 1px solid #39b54a;
+    border-bottom: 1px solid #b35e36;
 }
 
 .contact-content button,
@@ -3018,7 +3018,7 @@ html.cl-loaded .home-content__main {
 
 .contact-social li a:hover, 
 .contact-social li a:focus {
-    color: #39b54a;
+    color: #b35e36;
 }
 
 .contact-social li:last-child {
@@ -3041,7 +3041,7 @@ html.cl-loaded .home-content__main {
 }
 
 .message-success {
-    color: #39b54a;
+    color: #b35e36;
 }
 
 .message-warning i, .message-success i {
@@ -3220,7 +3220,7 @@ footer a {
 }
 
 footer a:hover, footer a:focus, footer a:active {
-    color: #39b54a;
+    color: #b35e36;
 }
 
 footer .row {
@@ -3250,9 +3250,8 @@ footer .row {
     outline: 0;
     border: none;
     width: 85px;
-    height: 28px;
     background: url("../images/logo-footer.png") no-repeat center;
-    background-size: 85px 28px;
+    background-size: 85px;
     font: 0/0 a;
     text-shadow: none;
     color: transparent;
@@ -3312,8 +3311,8 @@ footer .row {
     top: 0;
     right: 0;
     color: #FFFFFF;
-    background: #39b54a;
-    border-color: #39b54a;
+    background: #b35e36;
+    border-color: #b35e36;
     padding: 0 20px;
 }
 
