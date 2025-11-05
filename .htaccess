@@ -1,0 +1,61 @@
+# ----------------------------------------------------------------------
+# Configuración Básica de Café Talante (.htaccess)
+# ----------------------------------------------------------------------
+
+# Activar el motor de reescritura de URLs
+RewriteEngine On
+
+
+# ----------------------------------------------------------------------
+# 2. Configuración de Archivos por Defecto (index.html, etc.)
+# ----------------------------------------------------------------------
+DirectoryIndex index.html   
+
+# ----------------------------------------------------------------------
+# 3. Compresión Gzip (Mejora de Rendimiento)
+# ----------------------------------------------------------------------
+<IfModule mod_deflate.c>
+  # Comprimir texto, html, javascript, css, xml, etc.
+  AddOutputFilterByType DEFLATE text/plain
+  AddOutputFilterByType DEFLATE text/html
+  AddOutputFilterByType DEFLATE text/xml
+  AddOutputFilterByType DEFLATE text/css
+  AddOutputFilterByType DEFLATE application/xml
+  AddOutputFilterByType DEFLATE application/xhtml+xml
+  AddOutputFilterByType DEFLATE application/rss+xml
+  AddOutputFilterByType DEFLATE application/javascript
+  AddOutputFilterByType DEFLATE application/x-javascript
+</IfModule>
+
+# ----------------------------------------------------------------------
+# 4. Configuración de Cache (Cache de Navegador)
+# ----------------------------------------------------------------------
+# Establece cuánto tiempo los navegadores deben almacenar en caché los archivos estáticos.
+<IfModule mod_expires.c>
+  ExpiresActive On
+
+  # Cache por defecto (1 día)
+  ExpiresDefault "access plus 1 day"
+
+  # CSS, JavaScript, Web Fonts (1 semana)
+  ExpiresByType text/css "access plus 1 week"
+  ExpiresByType application/javascript "access plus 1 week"
+  ExpiresByType application/x-javascript "access plus 1 week"
+  ExpiresByType application/x-font-woff "access plus 1 week"
+  ExpiresByType application/font-woff "access plus 1 week"
+  ExpiresByType application/font-woff2 "access plus 1 week"
+  ExpiresByType application/vnd.ms-fontobject "access plus 1 week"
+  ExpiresByType font/ttf "access plus 1 week"
+
+  # Imágenes (1 mes - son menos propensas a cambiar)
+  ExpiresByType image/jpg "access plus 1 month"
+  ExpiresByType image/jpeg "access plus 1 month"
+  ExpiresByType image/png "access plus 1 month"
+  ExpiresByType image/gif "access plus 1 month"
+  ExpiresByType image/webp "access plus 1 month"
+  ExpiresByType image/svg+xml "access plus 1 month"
+  ExpiresByType image/x-icon "access plus 1 month"
+</IfModule>
+
+# Redirección de la tienda antigua a la nueva store.html si aplica:
+# Redirect 301 /tienda.html https://www.cafetalante.com/store.html
